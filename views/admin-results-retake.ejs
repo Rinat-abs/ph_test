@@ -1,0 +1,93 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+
+<div class="container">
+    <%if(typeof error == 'undefined') {%>
+        <div class="admin__results">
+            <a href="/admin/results/<%=category_id%>" class="admin__results__link">Назад</a>
+            <div class="admin__retake__title">
+                Категория:  <%=category.category%>
+            </div>
+            <div class="admin__retake__title">
+                Пересдали тест: <%=results.length%>
+            </div>
+            <input type="text" class="input__search" placeholder="Поиск по фамилии">
+            <table class="table" id="table">
+                <thead>
+                    <tr >
+                        <th>Фамилия, имя</th>
+                        <th>Аптека №</th>
+                        <th>Результат</th>
+                        <th>Результат %</th>
+                        <th>Результат пересдачи</th>
+                        <th>Результат пересдачи%</th>
+                        <th>Среднее арифметическое</th>
+                        <th>Среднее арифметическое %</th>
+                        <th>Дата</th>
+         
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for(let i = 0; i < results.length; i++){%>
+                    <tr class="search__item">
+                        <td><%=results[i].surname%> <%=results[i].name%></td>
+                        <td style="text-align: center; "><%=results[i].ap%></td>
+                        <td style="text-align: center; font-size: 18px;"><%=results[i].f_current_ball%>/<%=results[i].total_ball%></td>
+                        <td style="text-align: center; font-size: 18px;"><%=((results[i].f_current_ball/results[i].total_ball)*100).toFixed(1)%>%</td>
+                        <td style="text-align: center; font-size: 18px;"><%=results[i].current_ball%>/<%=results[i].total_ball%></td>
+                        <td style="text-align: center; font-size: 18px;"><%=((results[i].current_ball/results[i].total_ball)*100).toFixed(1)%>%</td>
+                        <td style="text-align: center; font-size: 18px;"><%=(results[i]. average_ball).toFixed(1)%>/<%=results[i].total_ball%></td>
+                        <td style="text-align: center; font-size: 18px;"><%=((results[i].average_ball/results[i].total_ball)*100).toFixed(1)%>%</td>
+                        
+                        <td style="text-align: center; "><%=results[i].date_test%></td>
+                    </tr>
+                    <%}%>
+            
+                </tbody>
+            </table>
+        </div>
+    <%} else {%>
+        <p style="text-align: center; color: crimson; font-size: 30px; margin-top: 60px;"><%=error%></p>
+    <%}%>
+    
+</div>
+<script src='/sorts/tablesort.min.js'></script>
+
+
+<script src='/sorts/tablesort.number.min.js'></script>
+<script src='/sorts/tablesort.date.min.js'></script>
+<script>
+    new Tablesort(document.getElementById('table'), {
+        descending: true
+    });
+    
+</script>
+<script>
+    const tr = document.querySelectorAll('.search__item');
+    const search = document.querySelector('.input__search');
+
+    search.addEventListener('keyup', () => {
+        if(search.value.length > 0)
+        {
+            for(let i = 0; i < tr.length; i++)
+            {
+                if(((tr[i].innerText.trim().toLowerCase().substr(0,tr[i].innerText.trim().length - 7))).trim().indexOf(search.value.trim().toLowerCase()) > -1)
+                {
+                    tr[i].classList.remove('hidden')
+                } else {
+                    tr[i].classList.add('hidden')
+                }
+            }
+           
+        } else {
+            for(let i = 1; i < tr.length; i++)
+            {
+                tr[i].classList.remove('hidden')
+            }
+        }
+    })
+    
+
+</script>
+<%- include('./blocks/footer.ejs') %>

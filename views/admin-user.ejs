@@ -1,0 +1,42 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+
+
+<div class="container">
+    <div class="admin__user">
+        <a href="/admin/users" class="admin__results__link">Назад</a>
+        <div class="admin__user__name">ID: <%=u.id%></div>
+        <div class="admin__user__name">Имя: <%=u.name%></div>
+    </div>
+    <div class="admin__user">
+        <div class="admin__user__name">Фамилия:  <%=u.surname%></div>
+    </div>
+    <div class="admin__user">
+        <div class="admin__user__name">ИИН:  <%=u.iin%></div>
+    </div>
+
+    <div class="admin__user__results">
+        <div class="admin__user__title">Результаты пройденных тестов</div>
+        <% if(results.length > 0) {%>
+            <div class="admin__user__items">
+                <%results.forEach(result => {%>
+                    <div class="admin__user__item">
+                        <a href="/admin/users/<%=u.id%>/<%=result.id%>">Просмотреть. <%=result.date%></a>
+                    </div>
+                <%})%>
+            
+            </div>
+        <%} else { %>
+            <br>
+            <br>
+            <p style="font-size: 32px; color: crimson;">Здесь пока пусто</p>
+        <%}%>
+        
+    </div>
+
+</div>
+
+
+
+<%- include('./blocks/footer.ejs') %>

@@ -1,0 +1,45 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+
+<section class="settings">
+        
+        
+    <div class="container">
+        <a href="/admin" class="admin__results__link" style="width: 80px; margin-top: 15px;">Назад</a>
+        <h1 class="settings__text">
+            Настройки
+        </h1>
+   
+        <div class="settings__wrapper">
+            <%if (error){%>
+                <p style="text-align: center; color: crimson; font-size: 22px;"><%=error%></p>
+            <%}%>
+            <%if (success){%>
+                <p style="text-align: center; color: darkcyan; font-size: 22px;"><%=success%></p>
+            <%}%>
+            <form method="post" action="/admin/settings-save" class="settings__form">
+                <div class="settings__item">
+                    <label for="test_time">Время теста в миллисекундах:</label>
+                    <input type="number" id="test_time" name="test_time" class="settings__input settings__input_short" placeholder="Время" autocomplete="off" required value="<%=settings.test_time%>">
+                </div>
+                <div class="settings__item">
+                    <label for="test_count">Кол-во тестовых вопросов:</label>
+                    <input type="number" id="test_count" name="test_count" class="settings__input settings__input_short" placeholder="Кол-во" autocomplete="off" value="<%=settings.number_test%>" required>
+                </div>
+                <!-- <div class="settings__item">
+                    <label for="category_id">Категория теста:</label>
+                    <select name="category_id" class="settings__input settings__input_middle" required>
+                        <option value="<%=test_category.id%>" selected><%=test_category.category%></option>
+ 
+                    </select>
+                </div> -->
+                
+                <button  class="settings__wrapper__link">Сохранить</button>
+            </form>
+            
+        </div>
+    </div>
+</section>
+
+<%- include('./blocks/footer.ejs') %>

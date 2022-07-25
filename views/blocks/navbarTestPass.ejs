@@ -1,0 +1,16 @@
+<header class="header">
+    <div class="container">
+        <div class="header__wrapper">
+            <div class="header__logo"><a href="#"><span>PH-</span>TESTS</a></div>
+            <ul class="header__menu">
+                
+                <% if(isAuth) {%>
+                    <!-- <li class="header__menu__item"><a id="timer" style="user-select: none;">20:00</a></li> -->
+                <%} else{%>
+                <li class="header__menu__item <%if((typeof isLogin !== 'undefined')) {%> header__menu__item_active <%}%> "><a href="/login">Войти</a></li>
+                <li class="header__menu__item <%if((typeof isReg !== 'undefined')) {%> header__menu__item_active <%}%>"><a href="/reg">Регистрация</a></li>
+                <%}%>
+            </ul>
+        </div>
+    </div>
+</header>

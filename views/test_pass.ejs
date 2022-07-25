@@ -1,0 +1,78 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbarTestPass.ejs') %>
+
+    
+<div class="container">
+    <input type="hidden"  id="currentTimer" value="<%=timer%>">
+    <form  class="test__pass" method="post" name="test" action="/test/finish">
+        <%for(let i = 0; i < tests.length; i++){%>
+            <div class="test__pass__wrapper">
+                <div class="test__pass__question">
+                    <span><%=i+1%>)</span><%=tests[i].question%>
+                </div>
+                <input type="hidden" name="question<%=i+1%>" value="<%=tests[i].id%>">
+                
+                <div class="test__pass__answers">
+                    <%for(let j = 0; j < tests[i].answers.length; j++){%>
+                        <div class="test__pass__answer">
+                            <input type="radio" id="answer<%=i+1%><%=j+1%>" name="answer<%=i+1%>" value="<%=tests[i].answers[j]%>">
+                            <label for="answer<%=i+1%><%=j+1%>"><%=tests[i].answers[j]%></label>  
+                        </div>
+                    <%}%>
+                   
+                </div>
+            </div>
+        <%}%>
+        
+        <input type="hidden" name="currentTestId" value="<%=currentTestId%>">
+       
+        <button type="submit" class="test__pass__btn">Завершить</button>
+    </form>
+</div>
+<div id="timer">25:00</div>
+<!-- <script  src="/js/checkTest.js"></script> -->
+<script>
+    function getZero(num)
+    {
+        if(num < 10)
+        {
+            return '0'+num;
+        } else 
+        {
+            return num;
+        }
+    }
+let timerShow = document.querySelector('#timer');
+
+
+const inputs = document.querySelectorAll('input');
+const currentTimer = +(document.querySelector('#currentTimer').value);
+let timeMinut = currentTimer;
+timer = setInterval(function () {
+   
+    seconds = timeMinut%60 
+    minutes = timeMinut/60%60 
+
+
+    if (timeMinut <= 0) {
+        document.querySelector(".test__pass__btn").click();
+        clearInterval(timer);
+
+    } else { 
+        let strTimer = `${getZero(Math.trunc(minutes))}:${getZero(seconds)}`;
+
+        timerShow.innerHTML = strTimer;
+    }
+    --timeMinut; 
+    
+}, 1000)
+
+const form = document.querySelector('form');
+form.addEventListener('keydown', function(event) {
+    if(event.keyCode == 13) {
+       event.preventDefault();
+    }
+ });
+</script>
+
+<%- include('./blocks/footerTestPass.ejs') %>

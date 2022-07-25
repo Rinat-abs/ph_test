@@ -1,0 +1,23 @@
+<header class="header">
+    <div class="container">
+        <div class="header__wrapper">
+            <div class="header__logo"><a href="/"><span>PH-</span>TESTS</a></div>
+            <ul class="header__menu">
+                
+                <% if(isAuth) {%>
+                    <%if(user.admin){%>
+                        <li class="header__menu__item header__menu__item_exit <%if((typeof isAdmin !== 'undefined')){%>header__menu__item_active<%}%>"><a href="/admin">Управление</a></li>
+                    <%}%>
+                    <%if ( !user.admin){%>
+                        <li class="header__menu__item header__menu__item_exit <%if((typeof isTest !== 'undefined')){%>header__menu__item_active<%}%>"><a href="/test">Тестирование</a></li>
+                    <%}%>
+                    
+                    <li class="header__menu__item header__menu__item_exit"><a href="/login/logout">Выйти</a></li>
+                <%} else{%>
+                <li class="header__menu__item <%if((typeof isLogin !== 'undefined')) {%> header__menu__item_active <%}%> "><a href="/login">Войти</a></li>
+                <li class="header__menu__item <%if((typeof isReg !== 'undefined')) {%> header__menu__item_active <%}%>"><a href="/reg">Регистрация </a></li>
+                <%}%>
+            </ul>
+        </div>
+    </div>
+</header>

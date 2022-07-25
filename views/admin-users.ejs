@@ -1,0 +1,81 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+
+<div class="container">
+    <div class="admin__users">
+        <a href="/admin" class="admin__results__link" style="width: 100px; margin-top: 30px;">Назад</a>
+        <div class="search">
+            <label for="search__input">Поиск по фамилии, имени</label>
+            <input class="search__input" placeholder="Поиск" id="search__input">
+    
+            <div class="search__items">
+                <%users.forEach(user => {%>
+                    <div class="search__item search__hide">
+                        <a class="search__question" href="/admin/users/<%=user.id%>">
+                            <%=user.name%> <%=user.surname%>
+                        </a>
+                    </div>
+                <%})%>
+
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const 
+    searchItem = document.querySelectorAll('.search__item'),
+    search = document.querySelector('.search__input');
+    search.addEventListener('input', (item) => {
+        searchQuestion(search.value, searchItem);
+    })
+
+
+    document.addEventListener('DOMContentLoaded', (item) => {
+        searchQuestion(search.value, searchItem);
+    })
+
+    function searchQuestion(searchString, searchItem)
+    {
+        if(searchString != ' ')
+        {   
+            
+            for(let i = 0; i < searchItem.length; i++)
+            {   
+                if( searchString != '' && searchString.length > 1)
+                {   console.log(searchItem[i].children[0])
+                    let question = searchItem[i].children[0].innerText.trim().toUpperCase();
+                    if(question.includes(searchString.toUpperCase()))
+                    {   
+                        if(searchItem[i].classList.contains('search__hide'))
+                        {
+                            searchItem[i].classList.remove('search__hide')
+                        }
+                        
+                    }
+                    else 
+                    {
+                        if(!searchItem[i].classList.contains('search__hide'))
+                        {
+                            searchItem[i].classList.add('search__hide');
+                        }
+                    }
+                }
+                else 
+                {
+                    if(!searchItem[i].classList.contains('search__hide'))
+                    {
+                        searchItem[i].classList.add('search__hide');
+                    } 
+                }
+                
+            }
+        }
+    }
+</script>
+
+
+
+<%- include('./blocks/footer.ejs') %>

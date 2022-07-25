@@ -1,0 +1,83 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+
+<div class="container">
+    <div class="admin__retake">
+        <a href="/admin" class="admin__results__link" style="width: 100px; margin-top: 30px;">Назад</a>
+        <div class="admin__retake__title">
+            Разрешение на тестирование
+        </div>
+
+        <div class="admin__retake__title">
+            Категория: "<%=category.category%>"
+        </div>
+        <%if (error){%>
+        <p style="color: crimson; font-size: 30px;"><%=error%></p>
+        <br>
+        <%}%>
+        <%if (success){%>
+            <p style="color: darkcyan; font-size: 30px;"><%-success%></p>
+            <br>
+        <%}%>
+        
+        <input type="text" class="input__search" placeholder="Поиск по фамилии и ИИН">
+            <table class="table table__permit">
+                <thead>
+                    <tr>
+                        <th>Фамилия, имя</th>
+                        <th>ИИН</th>
+                        <th>Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <%users.forEach(user=> {%>
+                    <tr class="surname search__item">
+                        <td  style="font-size: 22px;"><a style="color:dodgerblue" href="/admin/users/<%=user.id%>" target="_blank"><%=user.surname%> <%=user.name%></a></td>
+                        <td style="text-align: center;"><%=user.iin%></td>
+                        <td style="text-align: center;"><form action="/admin/test_permit" method="post"><input type="hidden" name="user_id" value="<%=user.id%>"> <button class="btn">Разрешить</button></form></td>
+                    </tr>
+                <%});%>
+                        
+             
+                    
+                    
+                
+            
+                </tbody>
+            </table>
+      
+        
+
+    </div>
+</div>
+
+
+<script>
+    const tr = document.querySelectorAll('.search__item');
+    const search = document.querySelector('.input__search');
+
+    search.addEventListener('keyup', () => {
+        if(search.value.length > 0)
+        {
+            for(let i = 0; i < tr.length; i++)
+            {
+                if(((tr[i].innerText.trim().toLowerCase().substr(0,tr[i].innerText.trim().length - 7))).trim().indexOf(search.value.trim().toLowerCase()) > -1)
+                {
+                    tr[i].classList.remove('hidden')
+                } else {
+                    tr[i].classList.add('hidden')
+                }
+            }
+           
+        } else {
+            for(let i = 1; i < tr.length; i++)
+            {
+                tr[i].classList.remove('hidden')
+            }
+        }
+    })
+    
+
+</script>
+<%- include('./blocks/footer.ejs') %>

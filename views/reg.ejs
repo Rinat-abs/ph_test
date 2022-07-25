@@ -1,0 +1,45 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+<section class="reg">
+        
+        
+    <div class="container">
+        <h1 class="reg__text">
+            Заполните форму регистрации
+        </h1>
+   
+        <div class="reg__wrapper">
+             <%if (error){%>
+            <p style="text-align: center; color: crimson; font-size: 30px;"><%=error%></p>
+            <%}%>
+            <%if (success){%>
+                <p style="text-align: center; color: darkcyan; font-size: 40px;"><%-success%></p>
+            <%}%>
+            <form action="/reg" method="post"  class="reg__form">
+                <div class="reg__item">
+                    <label for="iin">Введите ИИН:</label>
+                    <input type="text" id="iin" name="iin" class="reg__input" placeholder="ИНН" value="<%=data.iin%>" autocomplete="off"  maxlength="12" minlength="12" required>
+                </div>
+                <div class="reg__item">
+                    <label for="num_ap">Введите номер аптеки:</label>
+                    <input type="text" id="num_ap" name="num_ap" class="reg__input" placeholder="Номер аптеки" value="<%=data.num_ap%>" autocomplete="off" maxlength="3" minlength="1" required>
+                </div>
+                
+                <div class="reg__item">
+                    <label for="name" >Введите имя:</label>
+                    <input type="text" id="name" name="name" class="reg__input" placeholder="Имя" value="<%=data.name%>" autocomplete="off" maxlength="15" minlength="2"  required>
+                </div>
+                <div class="reg__item">
+                    <label for="surname">Введите фамилию:</label>
+                    <input type="text" id="surname" name="surname" class="reg__input" value="<%=data.surname%>" placeholder="Фамилия" autocomplete="off"  maxlength="25" minlength="2" required>
+                </div>
+              
+                <button  class="reg__wrapper__link">Регистрация</button>
+            </form>
+            
+        </div>
+    </div>
+</section>
+
+<%- include('./blocks/footer.ejs') %>

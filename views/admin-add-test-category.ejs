@@ -1,0 +1,47 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+
+<section class="settings">
+        
+        
+    <div class="container">
+        <a href="/admin/tests-category" class="admin__results__link" style="width: 100px; margin-top: 30px;">Назад</a>
+        <h1 class="settings__text">
+            Добавление новой категории
+        </h1>
+            
+        <div class="settings__wrapper">
+            <%if (error){%>
+                <p style="text-align: center; color: crimson; font-size: 20px;"><%=error%></p>
+            <%}%>
+            <%if (success){%>
+                <p style="text-align: center; color: darkcyan; font-size: 20px;"><%=success%></p>
+            <%}%>
+            <form method="post" action="/admin/add-category" class="settings__form">
+                <div class="settings__item">
+                    <label for="category">Название категории:</label>
+                    <input type="text" id="category" name="category" class="settings__input settings__input_middle" placeholder="Категория" autocomplete="off" required>
+                </div>
+                <div class="settings__item">
+                    <label for="category_date">Дата (2000-01-01): </label>
+                    <input type="text" id="category_date" name="category_date" class="settings__input settings__input_middle" placeholder="Пример: 2000-01-01" autocomplete="off" required>
+                </div>
+                
+
+                <p style="text-align: justify; margin-top: 20px;">
+                   <b> Внимание!</b> Убедитесь, что тестирование по прошлой категории завершно, так как прошлая категория тестов станет не актульной, после добавления новой.
+
+                </p>
+                
+                
+                <button  class="settings__wrapper__link">Добавить</button>
+            </form>
+            
+        </div>
+    </div>
+</section>
+
+
+
+<%- include('./blocks/footer.ejs') %>

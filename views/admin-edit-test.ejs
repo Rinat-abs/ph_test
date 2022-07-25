@@ -1,0 +1,109 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+
+<section class="add-test">
+        
+        
+    <div class="container">
+        <a href="/admin/check_tests" class="admin__results__link" style="width: 100px; margin-top: 30px;">Назад</a>
+        <h1 class="add-test__text">
+            Редактировать вопрос
+        </h1>
+   
+        <div class="add-test__wrapper">
+            <%if (error){%>
+                <p style="text-align: center; color: crimson; font-size: 22px;"><%=error%></p>
+            <%}%>
+            <%if (success){%>
+                <p style="text-align: center; color: darkcyan; font-size: 28px;"><%=success%></p>
+            <%}%>
+            <form method="post" action="/admin/edit_test" class="add-test__form">
+               
+             
+                <div class="add-test__item">
+                    <label for="question">Вопрос: </label>
+                    <textarea type="text" id="question" name="question" class="add-test__input " placeholder="Вопрос"  autocomplete="off" required><%=testEdit.question%></textarea>
+                </div>
+                <p style="text-align: center; margin-top: 20px;" id="error2"></p>
+
+                <div class="add-test__item">
+                    <label for="answers">Ответы в JSON формате: </label>
+                    <textarea type="text" id="answers" name="answers" class="add-test__input " placeholder="Ответы" style="height: 200px; font-size: 16px;" autocomplete="off"  required><%=testEdit.answers%></textarea>
+                </div>
+
+                <p style="text-align: justify; margin-top: 20px;" id="error2">
+                   
+
+                </p>
+                <input type="hidden" name="test_id" value="<%=testEdit.id%>">
+              
+                <button  class="add-test__wrapper__link">Сохранить</button>
+            </form>
+            
+        </div>
+    </div>
+</section>
+
+<script>
+    const answers = document.querySelector('#answers');
+  
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(evt) {
+        
+        try
+        {
+            evt.preventDefault();
+            let checkAnswers = answers.value.trim();
+            let test = ''
+           
+            for(let i = 0; i< checkAnswers.length; i++)
+            {
+                test = checkAnswers[i].replace(' ','');
+                test = checkAnswers.replace('\n','');
+            }  
+          
+            
+            const answers_val_obj = JSON.parse(answers.value.trim());
+            const question = document.querySelector('#question');
+            
+            if(question.value.trim().length < 6)
+            {
+                const error2 = document.querySelector('#error2');
+                error2.innerHTML = '<b style="color: red"> Внимание!</b> Вопрос слишком короткий'
+            }
+            else if(answers_val_obj['1'] == undefined) 
+            {
+                const error2 = document.querySelector('#error2');
+                error2.innerHTML = '<b style="color: red"> Ошибка!</b> Убедитесь в правильности внесенных данных'
+
+            }
+            else if(answers_val_obj['2'] == undefined) 
+            {
+                const error2 = document.querySelector('#error2');
+                error2.innerHTML = '<b style="color: red"> Ошибка!</b> Убедитесь в правильности внесенных данных'
+
+            }
+            else 
+            {
+                evt.defaultPrevented;
+                this.submit();
+            }
+         
+           
+        }
+        catch(e)
+        {   console.log(e)
+            const error2 = document.querySelector('#error2');
+            error2.innerHTML = '<b style="color: red"> Ошибка!</b>123  Убедитесь в правильности внесенных данных'
+        
+        }
+    })
+
+        
+        
+
+</script>
+
+
+<%- include('./blocks/footer.ejs') %>

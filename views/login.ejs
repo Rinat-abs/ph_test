@@ -1,0 +1,34 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+<section class="login">
+        
+        
+    <div class="container">
+        <h1 class="login__text">
+            Авторизация
+        </h1>
+   
+        <div class="login__wrapper">
+            <%if (error){%>
+                <p style="text-align: center; color: crimson; font-size: 30px;"><%=error%></p>
+            <%}%>
+            <form method="post" action="/login" class="login__form">
+                <div class="login__item">
+                    <label for="iin">Введите ИИН:</label>
+                    <input type="number" value="<%=data.iin%>"  id="iin" name="iin" class="login__input" placeholder="ИНН" autocomplete="off" required>
+                </div>
+                <div class="login__item">
+                    <label for="surname">Введите фамилию:</label>
+                    <input type="text" id="surname" value="<%=data.surname%>" name="surname" class="login__input" placeholder="Фамилия" autocomplete="off" required>
+                </div>
+             
+                <button  class="login__wrapper__link">Войти</button>
+            </form>
+            
+        </div>
+    </div>
+</section>
+
+
+<%- include('./blocks/footer.ejs') %>

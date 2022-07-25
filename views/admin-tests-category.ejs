@@ -1,0 +1,25 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+
+<section class="settings">
+    <div class="container">
+        <a href="/admin" class="admin__results__link" style="width: 100px; margin-top: 30px;">Назад</a>
+        <h1 class="settings__text">
+            Работа с тестами
+        </h1>
+   
+     
+        <div class="admin__menu">
+            <a href="/admin/add-test" class="admin__menu__item">Добавить вопрос</a>
+            <a href="/admin/add-test-category" class="admin__menu__item">Добавить категорию</a>
+            <a href="/admin/check_tests" class="admin__menu__item">Все тесты</a>
+           
+        </div>
+   
+    </div>
+</section>
+
+
+
+<%- include('./blocks/footer.ejs') %>

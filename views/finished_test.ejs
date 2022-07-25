@@ -1,0 +1,24 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+
+<section class="welcome">  
+    <div class="container">
+        <h1 class="welcome__text">
+            Добро пожаловать на сайт тестирования сотрудников аптек "Зерде-Фарма"
+        </h1>
+        <% if(!isAuth) {%>
+        <div class="welcome__wrapper">
+            <div class="welcome__wrapper__text">
+                Впервые на сайте? Пройдите регистрацию
+            </div>
+            <a href="/reg" class="welcome__wrapper__link">Регистрация</a>
+        </div>
+        <%}%>
+    </div>
+</section>
+
+
+
+
+<%- include('./blocks/footer.ejs') %>

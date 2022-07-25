@@ -1,0 +1,23 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+
+<div class="container">
+    <a href="/admin" class="admin__results__link" style="width: 100px; margin-top: 30px;">Назад</a>
+    <%if(typeof error == 'undefined') {%>
+        <div class="admin__all__results">
+            <div class="admin__all__results__items">
+                <%categories.forEach(category => {%>
+                    <a href="/admin/results/<%=category.id%>" class="admin__all__results__item"><%=category.category%></a> 
+                <%});%>
+               
+            </div>
+        </div>
+     
+    <%} else {%>
+        <p style="text-align: center; color: crimson; font-size: 30px; margin-top: 60px;"><%=error%></p>
+    <%}%>
+    
+</div>
+
+<%- include('./blocks/footer.ejs') %>

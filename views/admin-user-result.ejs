@@ -1,0 +1,50 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+
+<div class="container">
+
+    <div class="result">
+        <!-- <a href="/admin/users/<%=u.id%>" class="admin__results__link" style="width: 80px;">Назад</a> -->
+
+        <div class="result__score" >
+            <%=result.current_ball%>/<%=result.total_ball%>
+        </div>
+        <div class="result__score" style="width: 85px; background-color:<%if(((result.current_ball/result.total_ball)*100).toFixed(1) >= 60) {%>#4aa32a<%} else{%>rgb(223 56 56)<%}%>;">
+            <%=((result.current_ball/result.total_ball)*100).toFixed(1)%>%
+        </div>
+        <div class="result__score" style="width: 250px;" >
+            <%=result.date%>
+        </div>
+        <div class="result__score" style="width: 250px;" >
+            <%=result.category%>
+        </div>
+        <div class="result__score" style="width: 250px; font-size: 20px;" >
+            <%=u.name%> <%=u.surname%>
+        </div>
+        <div class="result__items">
+            <%result.answers.forEach((o, i) => {%>
+                <div class="result__item <%if(!o.r){%> result__item__mistake<%}%>">
+                    <div class="result__question">
+                        <%=i+1%>) <%=o.q%>
+                    </div> 
+                    
+                    <div class="result__answer">
+                        <%if(o.a != false){%>
+                            Ответ: <span><%=o.a%></span>
+                        <%} else {%>
+                            Ответ: <span>нет ответа</span> 
+                        <%}%>
+                       
+                    </div>
+                </div> 
+            <%})%>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+<%- include('./blocks/footer.ejs') %>

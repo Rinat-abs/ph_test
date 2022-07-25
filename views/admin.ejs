@@ -1,0 +1,23 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+
+<div class="container">
+    <div class="admin__menu">
+        <a href="/admin/test_permit" class="admin__menu__item">Разрешение на тестирование</a>
+        <a href="/admin/results" class="admin__menu__item">Результаты</a>
+        <a href="/admin/users" class="admin__menu__item">Пользователи</a>
+        <!-- <a href="/admin/add-test" class="admin__menu__item">Добавить вопрос</a> -->
+        <!-- <a href="/admin/retake-test" class="admin__menu__item">Доступ на пересдачу</a> -->
+        <%if(isSuperAdminAdmin == 2) {%>
+            <a href="/auto-add-test-to-db" class="admin__menu__item">Автозагрузка тестов</a>
+            <a href="/admin/tests-category" class="admin__menu__item">Тесты</a>
+            <a href="/admin/settings" class="admin__menu__item">Настройки</a>
+            
+        <%}%>
+       
+        
+    </div>
+</div>
+
+<%- include('./blocks/footer.ejs') %>

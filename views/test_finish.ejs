@@ -1,0 +1,34 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+
+<div class="container">
+
+    <div class="result">
+        <div class="" style="margin:0 auto; font-size:27px; width: 260px; text-align:center; margin-bottom:30px">Ваш результатъ</div>
+        <div class="result__score" style="margin:0 auto; font-size:72px; width: 260px">
+        <%=CR.currentBall%>/<%=CR.totalBall%>
+        </div>
+        <div class="result__score" style="margin:0 auto;  font-size:72px; width: 260px; margin-top: 30px;">
+            <%=((CR.currentBall/CR.totalBall)*100).toFixed(2)%>%
+        </div>
+        <!-- <div class="result__items">
+            <%CR.arr.forEach((o, i) => {%>
+                <div class="result__item <%if(!o.r){%> result__item__mistake<%}%>">
+                    <div class="result__question">
+                        <%=i+1%>) <%=o.q%>
+                    </div>
+                    <div class="result__answer">
+                        Ваш ответ: <span><%=o.a%></span>
+                    </div>
+                </div> 
+            <%})%>
+            
+        </div> -->
+    </div>
+</div>
+
+
+
+
+<%- include('./blocks/footer.ejs') %>

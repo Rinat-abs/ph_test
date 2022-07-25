@@ -1,0 +1,84 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+
+<div class="container">
+    <div class="admin__retake">
+        <a href="/admin/tests-category" class="admin__results__link">Назад</a>
+        <div class="admin__retake__title">
+            Редактор вопросов
+        </div>
+
+
+        <div class="admin__retake__title">
+            Категория: <%=category.category%>
+        </div>
+        <%if (error){%>
+        <p style="color: crimson; font-size: 30px;"><%=error%></p>
+        <%}%>
+        <%if (success){%>
+            <p style="color: darkcyan; font-size: 30px;"><%-success%></p>
+        <%}%>
+        <%if (tests.length  == 0){%>
+            <p style="color: crimson; font-size: 30px;">Здесь пока пусто</p>
+        <%} 
+        else 
+        {%>
+            <input type="text" class="input__search" placeholder="Поиск">
+            <table class="table table__permit">
+                <thead>
+                    <tr>
+                  
+                        <th width="75%">Вопрос</th>
+                        <th>Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%tests.forEach((test, i) => {%>
+                        <tr class="search__item">
+                         
+                            <td style="font-size: 18px;"><b><%=i+1%>)</b> <%=test.question%></td>
+                            <td  style="text-align: center; "><a href="/admin/edit_test/<%=test.id%>" class="btn" style="color: darkcyan; padding: 2px">Редактировать</a></td>
+                        </tr>
+                    <%})%>
+                    
+                    
+                
+            
+                </tbody>
+            </table>
+        <%}%>
+        
+
+    </div>
+</div>
+
+
+<script>
+        const tr = document.querySelectorAll('.search__item');
+        const search = document.querySelector('.input__search');
+    
+        search.addEventListener('keyup', () => {
+            if(search.value.length > 0)
+            {
+                for(let i = 0; i < tr.length; i++)
+                {
+                    if(((tr[i].innerText.trim().toLowerCase().substr(0,tr[i].innerText.trim().length - 7))).trim().indexOf(search.value.trim().toLowerCase()) > -1)
+                    {
+                        tr[i].classList.remove('hidden')
+                    } else {
+                        tr[i].classList.add('hidden')
+                    }
+                }
+               
+            } else {
+                for(let i = 1; i < tr.length; i++)
+                {
+                    tr[i].classList.remove('hidden')
+                }
+            }
+        })
+        
+    
+    </script>
+<%- include('./blocks/footer.ejs') %>

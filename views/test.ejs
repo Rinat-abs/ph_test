@@ -1,0 +1,30 @@
+<%- include('./blocks/head.ejs')  %> 
+<%- include('./blocks/navbar.ejs') %>
+
+    
+<section class="test">
+        
+        
+    <div class="container">
+        
+        <div class="test__wrapper">
+            <%if(checkFinished){%>
+                <div class="test__wrapper__text">
+                    Тестовые вопросы сформированы, начнем?
+                </div>
+                <form action="/test/start" method="post">
+                    
+                    <button  class="test__wrapper__link">Начать</button>
+                </form>
+            <%}else{%>
+                <div class="test__wrapper__text">
+                    Нет доступных тестов
+                </div>
+            <%}%>
+            
+        </div>
+    </div>
+</section>
+
+
+<%- include('./blocks/footer.ejs') %>
